@@ -343,17 +343,6 @@
   </div>
 </div>
   </div>
-  
-  <!-- 留言板 -->
-<div class="message-board">
-  <h3>柏油留言板</h3>
-  <form id="messageForm">
-    <input type="text" id="name" placeholder="昵称" required>
-    <textarea id="message" placeholder="留言内容" required></textarea>
-    <button type="submit">提交</button>
-  </form>
-  <ul id="messageList"></ul>
-</div>
 
   <script>
     var music = document.querySelector('.music-element')
@@ -429,51 +418,9 @@
       music.volume = volumeRange.value / 100;
     }
 
-    // 获取时间戳
-function getTimeStamp() {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth()+1).padStart(2,'0');
-  const d = String(now.getDate()).padStart(2,'0');
-  const h = String(now.getHours()).padStart(2,'0');
-  const min = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-  return `${y}-${m}-${d} ${h}:${min}:${s}`;
-}
-
-// 渲染留言列表
-function renderMessages(messages) {
-  messageList.innerHTML = '';
-  messages.forEach(msg=>{
-    const li = document.createElement('li');
-    li.innerHTML = `<div class="msg-content"><strong>${msg.name}</strong>：${msg.text}</div>
-                    <div class="timestamp">${msg.time}</div>`;
-    messageList.appendChild(li);
-  });
-  messageList.scrollTop = messageList.scrollHeight;
-}
-
-// 初始化
-let messages = JSON.parse(localStorage.getItem('messages') || '[]');
-const messageList = document.getElementById('messageList');
-renderMessages(messages);
-
-// 提交留言
-const form = document.getElementById('messageForm');
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const message = document.getElementById('message').value.trim();
-  if(name && message){
-    const msgObj = {name, text: message, time: getTimeStamp()};
-    messages.push(msgObj);
-    localStorage.setItem('messages', JSON.stringify(messages));
-    renderMessages(messages);
-    form.reset();
-  }
-});
   </script>
 </body>
 
 </html>
+
 
