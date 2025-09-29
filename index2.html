@@ -2,316 +2,238 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鱼酱的电子名片</title>
-    <!-- 导入字体 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #efb864;
-    margin: 0;
-    overflow: hidden;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鱼酱的电子名片</title>
+  <!-- 导入字体 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    body {
+  display: flex;
+  flex-direction: column; /* 上下排列 */
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #efb864;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 2rem; /* 播放器和留言板间距 */
 }
 
-.shell {
-    width: 330px;
-    height: 580px;
-    border-radius: 15px;
-    background-color: #fff6e7;
-    box-shadow: 0 10px 30px #00000085;
-    border-top: 1px solid rgba(255, 255, 255, .9);
-    border-left: 1px solid rgba(255, 255, 255, .9);
-    background: linear-gradient(to right bottom,
-        rgba(255, 255, 255, 0.26),
-        rgba(255, 255, 255, .16),
-        rgba(255, 255, 255, .06));
-    backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    box-sizing: border-box;
-    gap: 20px;
-}
-
-.cover {
-    width: 280px;
-    height: 270px;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 5px 30px #66bd6db7;
-}
-
-.cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.info {
-    text-align: center;
-}
-
-.title {
-    font-size: 25px;
-    color: rgb(40, 45, 100);
-}
-
-.singer {
-    font-size: 20px;
-    color: #38753d;
-}
-
-.btn-box {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-.btn-box i {
-    font-size: 24px;
-    color: rgb(40, 45, 100);
-    cursor: pointer;
-}
-
-.btn-box i.active {
-    color: #ff3677;
-}
-
-.volume-box {
-    display: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
-
-.volume-box.active {
-    display: flex;
-}
-
-.volume-down,
-.volume-up {
-    cursor: pointer;
-    color: rgb(40, 45, 100);
-}
-
-.volume-range {
-    width: 150px;
-    height: 5px;
-    border-radius: 5px;
-    background: rgb(255, 255, 255);
-    outline: none;
-    cursor: pointer;
-}
-
-.music-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.time-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.current-time,
-.duration {
-    font-size: 12px;
-    color: rgb(40, 45, 100);
-}
-
-.seekbar {
-    width: 180px;
-    height: 5px;
-    border-radius: 5px;
-}
-
-.play {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(40, 45, 100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.4s;
-}
-
-.play i,
-.pause i {
-    font-size: 32px;
-    color: #fff;
-}
-
-.pause {
-    /* 会被 JS 切换 */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(40, 45, 100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.4s;
-}
-
-video {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
+/* 顶部 LOGO */
 .a1 {
-    position: absolute;
-    top: 50px;
-    right: 50px;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 9999;
 }
-
 .a1 img {
-    width: 100px;
-}
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #efb864;
-    margin: 0;
-    overflow: hidden;
-    padding: 20px;
-    box-sizing: border-box;
+  width: 80px;
+  max-width: 20vw;
 }
 
+/* 播放器保持原样 */
 .shell {
-    width: 90%;
-    max-width: 400px;
-    height: auto;
-    aspect-ratio: 3 / 5; /* 高度和宽度保持一个良好比例 */
-    border-radius: 15px;
-    background-color: #fff6e7;
-    box-shadow: 0 10px 30px #00000085;
-    background: linear-gradient(to right bottom,
-        rgba(255, 255, 255, 0.26),
-        rgba(255, 255, 255, .16),
-        rgba(255, 255, 255, .06));
-    backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-    box-sizing: border-box;
-    gap: 1.2rem;
-}
-.cover {
-    width: 100%;
-    max-width: 90%;
-    aspect-ratio: 1 / 1;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 5px 30px #66bd6db7;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 15px;
+  background-color: #fff6e7;
+  box-shadow: 0 10px 30px #00000085;
+  background: linear-gradient(to right bottom,
+      rgba(255, 255, 255, 0.26),
+      rgba(255, 255, 255, .16),
+      rgba(255, 255, 255, .06));
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  gap: 1.2rem;
 }
 
-.cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    .cover {
+      width: 100%;
+      max-width: 90%;
+      aspect-ratio: 1 / 1;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 5px 30px #66bd6db7;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info .titlea {
+      font-size: 1.5rem;
+      color: rgb(40, 45, 100);
+      text-align: center;
+    }
+
+    .info .singer {
+      font-size: 1.2rem;
+      color: #38753d;
+      text-align: center;
+    }
+
+    .btn-box {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .btn-box i {
+      font-size: 1.6rem;
+      color: rgb(40, 45, 100);
+      cursor: pointer;
+    }
+
+    .volume-box {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .volume-range {
+      width: 50vw;
+      max-width: 200px;
+    }
+
+    .music-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .time-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .seekbar {
+      width: 50vw;
+      max-width: 200px;
+    }
+
+    .play,
+    .pause {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: rgb(40, 45, 100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+
+    .play i,
+    .pause i {
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    .a1 {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      z-index: 9999; /* 置顶 */
+    }
+
+    .a1 img {
+      width: 80px;
+      max-width: 20vw;
+    }
+
+   /* 💌 留言板样式 */
+   .msg-content {
+  font-size: 1rem;
+  color: rgb(40, 45, 100);
+}
+.message-board {
+  width: 90%;
+  max-width: 400px;
+  padding: 1.5rem;
+  border-radius: 15px;
+  background-color: #fff6e7;
+  box-shadow: 0 10px 30px #00000085;
+  background: linear-gradient(to right bottom,
+      rgba(255, 255, 255, 0.26),
+      rgba(255, 255, 255, .16),
+      rgba(255, 255, 255, .06));
+  backdrop-filter: blur(16px);
+  box-sizing: border-box;
 }
 
-.info .title {
-    font-size: 1.5rem;
-    color: rgb(40, 45, 100);
-    text-align: center;
+.message-board h3 {
+  margin-top: 0;
+  text-align: center;
+  color: rgb(40, 45, 100);
+  font-size: 1.5rem;
 }
 
-.info .singer {
-    font-size: 1.2rem;
-    color: #38753d;
-    text-align: center;
+.message-board form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.btn-box {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+.message-board input,
+.message-board textarea {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: none;
+  font-family: inherit;
 }
 
-.btn-box i {
-    font-size: 1.6rem;
-    color: rgb(40, 45, 100);
-    cursor: pointer;
+.message-board textarea {
+  min-height: 80px;
 }
 
-.volume-box {
-    display: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+.message-board button {
+  background-color: rgb(40, 45, 100);
+  color: #fff;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.volume-range {
-    width: 50vw;
-    max-width: 200px;
+.message-board button:hover {
+  background-color: #38753d; /* 按钮悬停颜色 */
 }
 
-.music-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+#messageList {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
 }
-
-.time-box {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.timestamp {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right; /* 右对齐 */
+  margin-top: 0.3rem;
 }
-
-.seekbar {
-    width: 50vw;
-    max-width: 200px;
+#messageList li {
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
-.play, .pause {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: rgb(40, 45, 100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.4s;
-}
-
-.play i,
-.pause i {
-    font-size: 1.8rem;
-    color: #fff;
-}
-.a1 {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-}
-
-.a1 img {
-    width: 80px;
-    max-width: 20vw;
-}
-/* 外层容器 */
+    /* 外层容器 */
 .image-section {
   width: 100%;
   margin-top: 1rem;
@@ -347,144 +269,69 @@ body {
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-.a1 {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-}
-
-.a1 img {
-    width: 80px;
-    max-width: 20vw;
-}
-.a1 {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    z-index: 9999; /* 数值越大越在上层 */
-}
-/* 留言板样式 */
-.message-board {
-  width: 90%;
-  max-width: 400px;
-  margin: 2rem auto; /* 居中 */
-  padding: 1rem;
-  border-radius: 10px;
-  background: #fff6e7;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.message-board h3 {
-  text-align: center;
-  color: rgb(40,45,100);
-  margin-bottom: 1rem;
-}
-
-#messageForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-#messageForm input,
-#messageForm textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-#messageForm button {
-  background: rgb(40,45,100);
-  color: white;
-  border: none;
-  padding: 0.6rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#messageForm button:hover {
-  background: #ff3677;
-}
-
 #messageList {
   list-style: none;
+  margin: 1rem 0 0;
   padding: 0;
-  margin-top: 1rem;
+  max-height: 200px; /* 固定高度，可按需求改 */
+  overflow-y: auto; /* 垂直滚动 */
 }
 
-#messageList li {
-  background: #fefefe;
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.content-wrapper {
-  display: flex;
-  flex-direction: column; /* 纵向排列 */
-  align-items: center;    /* 居中对齐 */
-  gap: 2rem;              /* 上下间距 */
-}
-
-
-
-
-    </style>
+  </style>
 </head>
 
 <body>
-    <div class="a1">
-        <img src="./1538117104_preview_ML logo_waifu2x_scale4x.png" alt="">
+  <video src="./周防桃子 (CV.渡部恵子) - ローリング△さんかく.mp3" muted loop autoplay></video>
+
+  <div class="a1">
+    <img src="./1538117104_preview_ML logo_waifu2x_scale4x.png" alt="">
+  </div>
+
+  <!-- 播放器 -->
+  <div class="shell">
+    <!-- 封面图 -->
+    <div class="cover">
+      <img src="./下载 (2).png" alt="">
     </div>
 
-    <div class="shell">
-        <!-- 封面图 -->
-        <div class="cover">
-            <img src="./下载 (2).png" alt="">
-        </div>
+    <!-- 歌曲信息 -->
+    <div class="info">
+      <div class="titlea">ローリング△さんかく</div>
+      <div class="singer">周防桃子</div>
+    </div>
 
-        <!-- 歌曲信息 -->
-        <div class="info">
-            <div class="titlea">ローリング△さんかく</div>
-            <div class="singer">周防桃子</div>
-        </div>
+    <!-- 音量控制 -->
+    <div class="volume-box">
+      <span class="volume-down"><i class="material-icons">remove</i></span>
+      <input type="range" class="volume-range" step="1" value="80" min="0" max="100"
+        oninput="music.volume = this.value/100">
+      <span class="volume-up"><i class="material-icons">add</i></span>
+    </div>
 
-        <!-- 音量控制 -->
-        <div class="volume-box">
-            <span class="volume-down"><i class="material-icons">remove</i></span>
-            <input type="range" class="volume-range" step="1" value="80" min="0" max="100"
-                oninput="music.volume = this.value/100">
-            <span class="volume-up"><i class="material-icons">add</i></span>
-        </div>
+    <!-- 操作按钮 -->
+    <div class="btn-box">
+      <i class="material-icons repeat" onclick="handleRepeat()">repeat</i>
+      <i class="material-icons favorite active" onclick="handleFavorite()">favorite</i>
+      <i class="material-icons volume" onclick="handleVolume()">volume_up</i>
+    </div>
 
-        <!-- 操作按钮 -->
-        <div class="btn-box">
-            <i class="material-icons repeat" onclick="handleRepeat()">repeat</i>
-            <i class="material-icons favorite active" onclick="handleFavorite()">favorite</i>
-            <i class="material-icons volume" onclick="handleVolume()">volume_up</i>
-        </div>
+    <!-- 播放控制 -->
+    <div class="music-box">
+      <div class="time-box">
+        <span class="current-time">0:0</span>
+        <input type="range" class="seekbar" step="1" value="0" min="0" max="100" oninput="handleSeekBar()">
+        <span class="duration">0:0</span>
+      </div>
 
-        <!-- 播放控制 -->
-        <div class="music-box">
-            <div class="time-box">
-                <span class="current-time">0:0</span>
-                <input type="range" class="seekbar" step="1" value="0" min="0" max="100" oninput="handleSeekBar()">
-                <span class="duration">0:0</span>
-            </div>
+      <span class="play" onclick="handlePlay()">
+        <i class="material-icons">play_arrow</i>
+      </span>
 
-            <span class="play" onclick="handlePlay()">
-                <i class="material-icons">play_arrow</i>
-            </span>
-
-            <audio class="music-element">
-                <source src="./周防桃子 (CV.渡部恵子) - ローリング△さんかく.mp3">
-            </audio>
-        </div>
-<!-- 平行字段 + 图片区块 -->
+      <audio class="music-element">
+        <source src="./周防桃子 (CV.渡部恵子) - ローリング△さんかく.mp3">
+      </audio>
+    </div>
+    <!-- 平行字段 + 图片区块 -->
 <div class="image-section">
   <div class="text-row">
     <span>小红书</span>
@@ -495,9 +342,10 @@ body {
     <img src="./未命名码 (1).png" alt="">
   </div>
 </div>
-   </div>
-    <!-- 留言板 -->
-<div class="message-board">
+  </div>
+  
+  <!-- 留言板 -->
+  <div class="message-board">
     <h3>留言板</h3>
     <form id="messageForm">
       <input type="text" id="name" placeholder="昵称" required>
@@ -507,130 +355,129 @@ body {
     <ul id="messageList"></ul>
   </div>
 
-</body>
-
-
-<script>
+  <script>
     var music = document.querySelector('.music-element')
     var playBtn = document.querySelector('.play')
     var seekbar = document.querySelector('.seekbar')
     var currentTime = document.querySelector('.current-time')
     var duration = document.querySelector('.duration')
     function handlePlay() {
-        // 如果音乐处于暂停状态
-        if (music.paused) {
-            // 播放音乐，更改按钮样式为暂停图标
-            music.play();
-            playBtn.className = 'pause'
-            playBtn.innerHTML = '<i class="material-icons">pause</i>'
-        } else {
-            // 暂停音乐，更改按钮样式为播放图标
-            music.pause();
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons">play_arrow</i>'
-        }
-        // 当音乐播放完毕时
-        music.addEventListener('ended', function () {
-            // 更改按钮样式为播放图标，并将音乐当前时间重置为0
-            playBtn.className = 'play'
-            playBtn.innerHTML = '<i class="material-icons">play_arrow</i>'
-            music.currentTime = 0
-        });
+      if (music.paused) {
+        music.play();
+        playBtn.className = 'pause'
+        playBtn.innerHTML = '<i class="material-icons">pause</i>'
+      } else {
+        music.pause();
+        playBtn.className = 'play'
+        playBtn.innerHTML = '<i class="material-icons">play_arrow</i>'
+      }
+      music.addEventListener('ended', function () {
+        playBtn.className = 'play'
+        playBtn.innerHTML = '<i class="material-icons">play_arrow</i>'
+        music.currentTime = 0
+      });
     }
-    // 当音乐元素的元数据加载完毕时
     music.onloadeddata = function () {
-        // 设置进度条最大值为音乐总时长
-        seekbar.max = music.duration// 将音乐总时长格式化为分钟和秒，并在HTML中显示出来
-        var ds = parseInt(music.duration % 60)
-        var dm = parseInt((music.duration / 60) % 60)
-        duration.innerHTML = dm + ':' + ds
+      seekbar.max = music.duration
+      var ds = parseInt(music.duration % 60)
+      var dm = parseInt((music.duration / 60) % 60)
+      duration.innerHTML = dm + ':' + ds
     }
-    // 当音乐当前播放时间更新时
     music.ontimeupdate = function () {
-        // 将进度条的值设为当前播放时间，以实现进度条随着音乐播放而动态更新
-        seekbar.value = music.currentTime
+      seekbar.value = music.currentTime
     }
-    // 定义处理进度条拖动的函数
     handleSeekBar = function () {
-        // 将音乐当前播放时间设为进度条的值，以实现通过拖动进度条控制音乐播放进度
-        music.currentTime = seekbar.value
+      music.currentTime = seekbar.value
     }
-    // 每当音乐的播放时间更新时
     music.addEventListener('timeupdate', function () {
-        // 将音乐当前播放时间格式化为分钟和秒，并在HTML中显示出来
-        var cs = parseInt(music.currentTime % 60)
-        var cm = parseInt((music.currentTime / 60) % 60)
-        currentTime.innerHTML = cm + ':' + cs
+      var cs = parseInt(music.currentTime % 60)
+      var cm = parseInt((music.currentTime / 60) % 60)
+      currentTime.innerHTML = cm + ':' + cs
     }, false)
-    // 爱心点击变色
     var favIcon = document.querySelector('.favorite')
     function handleFavorite() {
-        favIcon.classList.toggle('active');
+      favIcon.classList.toggle('active');
     }
-    // 循环播放
     var repIcon = document.querySelector('.repeat')
     function handleRepeat() {
-        if (music.loop == true) {
-            music.loop = false
-            repIcon.classList.toggle('active')
-        }
-        else {
-            music.loop = true
-            repIcon.classList.toggle('active')
-        }
+      if (music.loop == true) {
+        music.loop = false
+        repIcon.classList.toggle('active')
+      }
+      else {
+        music.loop = true
+        repIcon.classList.toggle('active')
+      }
     }
-    // 获取 HTML 中的音量图标、音量控制器、音量滑动条、音量减小按钮和音量增加按钮
     var volIcon = document.querySelector('.volume');
     var volBox = document.querySelector('.volume-box');
     var volumeRange = document.querySelector('.volume-range');
     var volumeDown = document.querySelector('.volume-down');
     var volumeUp = document.querySelector('.volume-up');
-    // 处理音量控制器的函数
     function handleVolume() {
-        // 切换音量图标和音量控制器的 class 属性
-        volIcon.classList.toggle('active');
-        volBox.classList.toggle('active');
+      volIcon.classList.toggle('active');
+      volBox.classList.toggle('active');
     }
-    // 为音量减小按钮和音量增加按钮分别添加 click 事件监听器，
-    // 调用 handleVolumeDown 和 handleVolumeUp 函数
     volumeDown.addEventListener('click', handleVolumeDown);
     volumeUp.addEventListener('click', handleVolumeUp);
-    // 处理音量减小的函数
     function handleVolumeDown() {
-        // 将音量滑动条的值减少 20
-        volumeRange.value = Number(volumeRange.value) - 20;
-        // 将音乐的音量设置为音量滑动条的值除以 100
-        music.volume = volumeRange.value / 100;
+      volumeRange.value = Math.max(Number(volumeRange.value) - 20, 0);
+      music.volume = volumeRange.value / 100;
     }
-    // 处理音量增加的函数
     function handleVolumeUp() {
-        // 将音量滑动条的值增加 20
-        volumeRange.value = Number(volumeRange.value) + 20;
-        // 将音乐的音量设置为音量滑动条的值除以 100
-        music.volume = volumeRange.value / 100;
+      volumeRange.value = Math.min(Number(volumeRange.value) + 20, 100);
+      music.volume = volumeRange.value / 100;
     }
-// 简易留言板功能
-const form = document.getElementById('messageForm');
+
+    // 简易留言板
+    const form = document.getElementById('messageForm');
 const messageList = document.getElementById('messageList');
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   const name = document.getElementById('name').value.trim();
   const message = document.getElementById('message').value.trim();
-
   if (name && message) {
     const li = document.createElement('li');
     li.innerHTML = `<strong>${name}</strong>：${message}`;
-    messageList.prepend(li); // 最新留言显示在最上方
+    messageList.appendChild(li);
     form.reset();
   }
 });
+// 格式化时间函数
+function getTimeStamp() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
 
-</script>
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const message = document.getElementById('message').value.trim();
+  if (name && message) {
+    const li = document.createElement('li');
+    const time = getTimeStamp();
+    li.innerHTML = `
+      <div class="msg-content">
+        <strong>${name}</strong>：${message}
+      </div>
+      <div class="timestamp">${time}</div>
+    `;
+    messageList.appendChild(li);
 
+    // ⚡️自动滚动到底部
+    messageList.scrollTop = messageList.scrollHeight;
+
+    form.reset();
+  }
+});
+  </script>
+</body>
 
 </html>
-
-
-
-
