@@ -363,6 +363,66 @@ body {
     right: 2rem;
     z-index: 9999; /* 数值越大越在上层 */
 }
+/* 留言板样式 */
+.message-board {
+  width: 90%;
+  max-width: 400px;
+  margin: 2rem auto; /* 居中 */
+  padding: 1rem;
+  border-radius: 10px;
+  background: #fff6e7;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.message-board h3 {
+  text-align: center;
+  color: rgb(40,45,100);
+  margin-bottom: 1rem;
+}
+
+#messageForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#messageForm input,
+#messageForm textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+#messageForm button {
+  background: rgb(40,45,100);
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#messageForm button:hover {
+  background: #ff3677;
+}
+
+#messageList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+#messageList li {
+  background: #fefefe;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
 
 
@@ -429,6 +489,17 @@ body {
   </div>
 </div>
    </div>
+    <!-- 留言板 -->
+<div class="message-board">
+  <h3>留言板</h3>
+  <form id="messageForm">
+    <input type="text" id="name" placeholder="昵称" required>
+    <textarea id="message" placeholder="留言内容" required></textarea>
+    <button type="submit">提交</button>
+  </form>
+  <ul id="messageList"></ul>
+</div>
+
 </body>
 
 
@@ -531,9 +602,26 @@ body {
         // 将音乐的音量设置为音量滑动条的值除以 100
         music.volume = volumeRange.value / 100;
     }
+// 简易留言板功能
+const form = document.getElementById('messageForm');
+const messageList = document.getElementById('messageList');
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (name && message) {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${name}</strong>：${message}`;
+    messageList.prepend(li); // 最新留言显示在最上方
+    form.reset();
+  }
+});
 
 </script>
 
 
 </html>
+
 
